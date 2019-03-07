@@ -12,7 +12,7 @@ COPY . /opt/netdata.git
 WORKDIR /opt/netdata.git
 
 # Install from source
-RUN chmod +x netdata-installer.sh && ./netdata-installer.sh --dont-wait --dont-start-it
+RUN chmod +x netdata-installer.sh && netdata-installer.sh --dont-wait --dont-start-it
 
 # files to one directory
 RUN mkdir -p /app/usr/sbin/ \
@@ -67,6 +67,13 @@ RUN \
     chown -R root:netdata /usr/libexec/netdata/plugins.d/apps.plugin /usr/libexec/netdata/plugins.d/cgroup-network && \
     chmod 4750 /usr/libexec/netdata/plugins.d/cgroup-network /usr/libexec/netdata/plugins.d/apps.plugin && \
     chmod 0750 /var/lib/netdata /var/cache/netdata && \
+    # Add nanoNodeMonitor config
+    cd /usr/libexec/netdata/python.d/ && wget https://raw.githubusercontent.com/gr0vity/NanoNodeGraphics/master/src/nanonode.chart.py && \
+    cd /usr/lib/netdata/conf.d/python.d && wget https://raw.githubusercontent.com/gr0vity/NanoNodeGraphics/master/src/nanonode.conf && \
+    cd /usr/share/netdata/web && wget https://raw.githubusercontent.com/gr0vity/NanoNodeGraphics/master/src/nano.html && \
+    cd /usr/share/netdata/web && wget https://raw.githubusercontent.com/gr0vity/NanoNodeGraphics/master/src/nano.css && \
+    chown -R netdata:netdata /usr/share/netdata/web/nano.html && \
+    chown -R netdata:netdata /usr/share/netdata/web/nano.css && \ 
     # Link log files to stdout
     ln -sf /dev/stdout /var/log/netdata/access.log && \
     ln -sf /dev/stdout /var/log/netdata/debug.log && \
