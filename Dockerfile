@@ -70,7 +70,7 @@ RUN \
     chmod 0750 /var/lib/netdata /var/cache/netdata && \
     # Add nanoNodeMonitor config
     cd /usr/libexec/netdata/python.d && wget https://raw.githubusercontent.com/Joohansson/NanoNodeGraphics/master/src/nanonode.chart.py && \
-    cd /usr/lib/netdata/conf.d/python.d && wget https://raw.githubusercontent.com/Joohansson/NanoNodeGraphics/master/src/nanonode.conf && \
+    cd /usr/lib/netdata/conf.d/python.d && wget hhttps://raw.githubusercontent.com/gr0vity/oneClickNano/master/nanonode.conf && \
     cd /etc/netdata/python.d && wget https://raw.githubusercontent.com/Joohansson/NanoNodeGraphics/master/src/nanonode.conf && \
     cd /usr/share/netdata/web && rm *.html && \
     cd /usr/share/netdata/web && wget https://raw.githubusercontent.com/Joohansson/NanoNodeGraphics/master/src/nano.html && \
