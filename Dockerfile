@@ -69,12 +69,15 @@ RUN \
     chmod 4750 /usr/libexec/netdata/plugins.d/cgroup-network /usr/libexec/netdata/plugins.d/apps.plugin && \
     chmod 0750 /var/lib/netdata /var/cache/netdata && \
     # Add nanoNodeMonitor config
-    cd /usr/libexec/netdata/python.d/ && wget https://raw.githubusercontent.com/gr0vity/NanoNodeGraphics/master/src/nanonode.chart.py && \
-    cd /usr/lib/netdata/conf.d/python.d && wget https://raw.githubusercontent.com/gr0vity/NanoNodeGraphics/master/src/nanonode.conf && \
-    cd /usr/share/netdata/web && wget https://raw.githubusercontent.com/gr0vity/NanoNodeGraphics/master/src/nano.html && \
-    cd /usr/share/netdata/web && wget https://raw.githubusercontent.com/gr0vity/NanoNodeGraphics/master/src/nano.css && \
+    cd /usr/libexec/netdata/python.d && wget https://raw.githubusercontent.com/Joohansson/NanoNodeGraphics/master/src/nanonode.chart.py && \
+    cd /usr/lib/netdata/conf.d/python.d && wget https://raw.githubusercontent.com/Joohansson/NanoNodeGraphics/master/src/nanonode.conf && \
+    cd /etc/netdata/python.d && wget https://raw.githubusercontent.com/Joohansson/NanoNodeGraphics/master/src/nanonode.conf && \
+    cd /usr/share/netdata/web && rm *.html && \
+    cd /usr/share/netdata/web && wget https://raw.githubusercontent.com/Joohansson/NanoNodeGraphics/master/src/nano.html && \
+    cd /usr/share/netdata/web && wget https://raw.githubusercontent.com/Joohansson/NanoNodeGraphics/master/src/nano.css && \
     chown -R netdata:netdata /usr/share/netdata/web/nano.html && \
-    chown -R netdata:netdata /usr/share/netdata/web/nano.css && \ 
+    chown -R netdata:netdata /usr/share/netdata/web/nano.css && \
+    mv /usr/share/netdata/web/nano.html /usr/share/netdata/web/index.html && \ 
     # Link log files to stdout
     ln -sf /dev/stdout /var/log/netdata/access.log && \
     ln -sf /dev/stdout /var/log/netdata/debug.log && \
